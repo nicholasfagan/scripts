@@ -1,0 +1,63 @@
+#!/bin/bash
+#usage: otest <compile command> <basename> <source extension> <execution time limit>
+#exit status:
+#1 invalid output
+#2 timout
+#3 compile error
+#4 files not found
+#5 option parse error
+
+if [ $# != 4 ]; then
+	echo "usage: otest <compile command> <basename> <source extension> <execution time limit>"
+	exit 5
+fi
+
+
+cc="$( which $1 )"
+base="$2"
+ext="$3"
+tlim="$4"
+
+src="$base.$ext"
+if [ ! -f "$src" ]; then
+	echo ERR
+	exit 4
+fi
+
+
+in="$base.in"
+out="$base.out"
+new="$base.new"
+#make sure files exist
+if [ ! -f "$in" ]; then
+	echo ERR
+	exit 4
+fi
+if [ ! -f "$out" ]; then
+	echo ERR
+	exit 4
+fi
+
+#compile, check for errors
+$cc -o $base $src >/dev/null 2>&1
+errno=$?
+if [ $errno != 0 ]; then
+	echo FAIL
+	exit 3
+fi
+if [ ! -f "$base" ]; then
+	echo FAIL
+	exit 3
+fi
+
+timeout "$tlim" "$( readlink -f $base )" < "$( readlink -f $in )" > "$( readlink -f $new )"
+
+diff "$out" "$new" >/dev/null 2>&1
+errno=$?
+if [ $errno != 0 ]; then
+	echo FAIL
+	exit 1
+else
+	echo PASS
+	exit 0
+fi
