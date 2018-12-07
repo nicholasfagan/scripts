@@ -1,0 +1,3 @@
+#!/bin/bash
+ip -4  address show wlp3s0 up | awk '/.*inet.*/ { print $2 } ' | cut -d/ -f1
+
