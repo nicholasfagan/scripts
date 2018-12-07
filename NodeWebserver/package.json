@@ -1,0 +1,19 @@
+{
+  "name": "nodewebserver",
+  "version": "1.0.0",
+  "description": "Simple Web Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Fagan",
+  "license": "ISC",
+  "dependencies": {
+    "clui": "^0.3.6",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "path": "^0.12.7",
+    "url": "^0.11.0",
+    "util": "^0.11.1"
+  }
+}
