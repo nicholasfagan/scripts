@@ -10,7 +10,7 @@ primes: primes.c
 	gcc -lm -std=c99 -Ofast -o primes primes.c
 fib: fib.c
 	gcc -std=c99 -Ofast -o fib fib.c
-modseq:
+modseq: modseq.c
 	gcc -lm -std=c99 -Ofast -o modseq modseq.c
 
 
