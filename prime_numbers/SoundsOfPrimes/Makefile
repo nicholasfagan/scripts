@@ -1,15 +1,21 @@
 
-
+#default values
 N=100000
 MOD=88
 DUR=1000
 SCALE=0.05
 
-
 all: prime_seive
-prime_seive: prime_seive.c
-	gcc -lm -std=c99 -Ofast -o prime_seive prime_seive.c
+primes: primes.c
+	gcc -lm -std=c99 -Ofast -o primes primes.c
+fib: fib.c
+	gcc -std=c99 -Ofast -o fib fib.c
+modseq:
+	gcc -lm -std=c99 -Ofast -o modseq modseq.c
 
-run: prime_seive
-	./prime_seive $(N) $(MOD) $(DUR) $(SCALE) | aplay
+
+prime_listen: primes modseq
+	./primes $(N) | ./modseq $(MOD) $(DUR) $(SCALE) | aplay
+fib_listen: fib modseq
+	./fib | ./modseq $(MOD) $(DUR) $(SCALE) | aplay
 
