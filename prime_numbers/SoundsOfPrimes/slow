@@ -1,0 +1,11 @@
+#!/bin/bash
+
+(( curr = 1 ))
+while true; do
+	echo $curr
+	cat /dev/urandom | ~/fwords/dup $curr | ./blend $curr | timeout $curr aplay;
+	((curr++))
+done
+
+
+

@@ -19,19 +19,14 @@ float sawtooth_wave(float time, float note, float scale) {
 return ((ulli)(time * scale) % (ulli)note ) / note;
 }
 float sin_wave(float time, float note, float scale) {
-	return (sin(time*note*scale)+1)/2;
+	return (sawtooth_wave(time,note,scale));
 }
 
 
 //returns a number from 0 to 1 
 float wave_form(float time, float note, float scale) {
-	return sin_wave(time,note,scale);
+	return (sin(time*note*scale)+1)/2;
 }
-
-
-	
-
-
 void note(ulli n) {
 	for(int i = 0; i < dur; i++){
 		float sum = 0;
